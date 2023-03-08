@@ -1,0 +1,19 @@
+{
+  "name": "valnya_discord_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@keyv/sqlite": "^3.6.4",
+    "discord.js": "^14.7.1",
+    "keyv": "^4.5.2",
+    "nodemon": "^2.0.21"
+  }
+}
