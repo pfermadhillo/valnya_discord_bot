@@ -106,7 +106,7 @@ client.on(Events.MessageCreate, async message => {
 		message.channel.send("...  *phew* ...  done streak: " + streak);
   		message.delete();
   	}
-  	else if(msgLC.includes("bone")){
+  	else if(message.content.includes("bone")){
   		var bonePrefix = "@" + message.author.username.toString() + " wills  ***__T H E   B O N E S__***  to speak! \n";
   		message.channel.send(bonePrefix+rd.rollTheBones());
   		message.delete();
