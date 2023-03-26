@@ -7,14 +7,45 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 
 const rc = require('./roll_call.js');
 const rd = require('./roll_dice.js');
+const bfq = require('./bot_funny_quips.js');
 
+
+const pingList = ["pong","pong","pong","pong","pong","pong","pong","pong","pong","pong","pong","pong",
+			"pong","pong","pong","pong","pong","pong","pong","pong","pong","pong","pong","pong",
+			"stahp","i got u","wat","wat do", "cash me ousside","no plz no","ooo-wee","oof","big mood",
+			"im here", "relax bruh", "chill dawg", "naw, that aint me", "raspberry sherbert","get rekt skrub",
+			"roundtrip 24.7ms\n...lol not really", "🇾", "💖💞💝", "㊙️","🍆🍑💦"];
+
+function getRandomInt(min, max) { // inclusive
+    return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
+}
 
 client.once(Events.ClientReady, () => {
-	console.log('Ready!');
+	var tz_offset = -5 // -5 is central in the summertime
+	var dt_central = new Date(new Date().getTime() + (new Date().getTimezoneOffset() * 60000) + (3600000 * tz_offset))
+	console.log('Ready as '+client.user.tag+", time:"+dt_central);
+
+	// var day = dt_central.getDay()
+	// var hour = dt_central.getHours()
+	// var minute = dt_central.getMinutes()
+
+	// 0 5 10 * * 2  =  Tuesday 10:05:00 am 
+
+	rc.setup_rollcall(client)
+	
+
+            
+        // When you want to start
 });
 
 client.on(Events.MessageCreate, async message => {
 	if (message.author.bot) return;
+
+	bfq.check_word(message)
+
+	// if(message.content.includes('ping')){
+	// 	message.channel.send(pingList[getRandomInt(0,pingList.length-1)]);
+	// }
 
 	let args;
 	if (message.guild) {

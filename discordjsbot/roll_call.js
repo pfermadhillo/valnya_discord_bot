@@ -1,91 +1,89 @@
+const cron = require('cron');
 
 // var userlist = "";
 // var poll = {poll:"",user:""};
 // var option = [];
 // var userlist = [];
 
+const GM_id = "573683013813272606"
+const valnya_active_id = "576081452211372062"
+const sacrifice_active_id = "563403299470966816"
+
+
+var announce = "\n Lemme know below if you can make it!";
+	announce += "\n";
+	announce += "\n🇾 - If you are coming (late is okay)";
+	announce += "\n❔ - If you might try but aren't sure";
+	announce += "\n🇳 - If you cannot make it";
+	announce += "\n";
+	announce += "\n We will see you at ";
+
+var meet = "(*Online*) at 6:30pm!"
+// role_id:"<@&576081452211372062>"
+
+const rollsToCallArray= [
+// {
+// 	cron: '0 * * * * *',
+// 	guildID:'317773499156660224',
+// 	channelID:'563397845432926238',
+// 	tagID:GM_id,
+// 	message:'   New Test Message at: '+ new Date()
+// },
+{
+	cron: '0 5 15 * * 2', // =  Tuesday 10:05:00 am // -5 GMT
+	guildID:'317773499156660224',
+	channelID:'563397845432926238',
+	tagID:valnya_active_id,
+	message:'   **Its is Tuesday my dudes!!**'+announce+meet
+},
+{
+	cron: '0 5 15 * * 4', // =  thursday 10:05:00 am // -5 gmt
+	guildID:'317773499156660224',
+	channelID:'563397845432926238',
+	tagID:sacrifice_active_id,
+	message:'   **Its is Thursday my dudes!!**'+announce+meet
+}]
+
+function makeRoleFromID(id){
+	return "<@&" + id + ">"
+}
+
 var check_rollcall = function(){
 }
 
-var setup_rollcall = function(message,delim="!cookie"){
+var setup_rollcall = function(client){
+	rollsToCallArray.forEach(rtc => {
+		let scheduledMessage = new cron.CronJob(rtc.cron, () => {
+	      // This runs every day at 10:30:00, you can do anything you want
+	      // Specifing your guild (server) and your channel
+	        var dayword = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            var msg = " **It is "+dayword+" my dudes!!**";
 
-// 	var author = message.author.username;
-// 	var text = message.toString();
-    
-	
-// 	var res = text.toLowerCase().split(" ");
-// 	var quote = text.split("\"");
-    
-//     var retval = "Your input did not match expected pattern\n"
-//               +"!poll \"text\" | creates poll \n"
-//               +"!poll option \"text\" | adds option \n"
-//               +"!poll 1 | votes for option 1 \n"
-//               +"!poll clear | wipes current poll \n"
-//               ; 
-	
+	        const guild = client.guilds.cache.get(rtc.guildID);
+	        const channel = guild.channels.cache.get(rtc.channelID);
 
-    
-//     if(!res[1]){
-//         if(poll.poll){
-// 	        retval = poll.poll+"\n";
-//             option.forEach(function(value){
-//               retval += value.option +" : "+value.tally+"\n";
-//             });
-// 	    }
-//     }else if (res[1].charAt(0) =='\"'){
-// 	    // create poll
-// //         console.log("res1: "+res[1]);
-        
-//         if(poll.poll){
-//             retval = "Poll already exists!\n"
-//                     +poll.poll+"\n";
-//             option.forEach(function(value){
-//               retval += value.option  +" : "+value.tally+"\n";
-//             });
-//         }else{
-//             if(!quote[1]){}else{
-//                 poll.poll=quote[1];
-//                 poll.user=author;
-//                 retval = "Poll is now:\n"
-//                             +poll.poll;
-//             }
-//         }
-// 	}else if (res[1]=="option"){
-// 	    if(!quote[1]){}else{
-// 	        option.push({option:quote[1],tally:0});
-//             retval = "Added option:\n"
-//             +option[option.length-1].option;
-//         }
-// 	}else if (!isNaN(res[1])){
-//         var i = res[1]-1;
-//         var did_vote = false;
-//         userlist.forEach(function(value){
-//               if(author == value.user){
-//                 did_vote = true;
-//               }
-//             });
-//         if(did_vote){
-//             retval = "You have already voted in this poll!";
-//         }else{
-//             if(option[i]){
-//                 option[i].tally += 1;
-//                 retval = option[i].option +" : "+ option[i].tally;
-//                 userlist.push({user:author});
-//             }else{
-//                 retval = "Option "+res[1]+" does not exist!";
-//             }
-//         }
-// 	}else if(res[1]=="clear"){
-//         poll = {poll:"",user:""};
-//         option = [];
-// 	userlist = [];
-//         retval = "Cleared the poll!";
-//     }
-		  
-// // 	console.log(author+"|"+res+"|"+quote+"\n"+JSON.stringify(poll));
-	
-// 	return retval;
-	
+	        //         NOTIFY_CHANNEL.send(item.role_id + msg + announce + item.meet)
+
+	        channel.send(makeRoleFromID(rtc.tagID)+rtc.message)
+	          .then(message => {
+	          	console.log(`Sent message: ${message.content}`)
+	          	message.react('🇾').catch(console.error)
+		        message.react('❔').catch(console.error)
+		        message.react('🇳').catch(console.error)
+	          })
+	          
+
+
+	        	// .then(() => message.react('🇾'))
+	        	// .then(() => message.react('❔'))
+	        	// .then(() => message.react('🇳'))
+	        	.catch(console.error);
+
+	        // console.log("Sent message: "+rtc.message)
+	    });
+
+	    scheduledMessage.start()
+	});
 }
 
 
