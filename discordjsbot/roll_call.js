@@ -18,7 +18,7 @@ var announce = "\n Lemme know below if you can make it!";
 	announce += "\n";
 	announce += "\n We will see you at ";
 
-var meet = "(*Online*) at 6:30pm!"
+var meet = "(*Online*) at 6:00pm!"
 // role_id:"<@&576081452211372062>"
 
 const rollsToCallArray= [

@@ -19,7 +19,7 @@ const wordArray = [
 {
 	word: "fuck",
 	freq: 3,
-	replies:["language!","hey :/", "im telling on you to "+makeRoleFromID(GM_id)]
+	replies:["language!","language","language..","hey :/", "im telling on you to "+makeRoleFromID(GM_id)]
 },
 {
 	word: "welcome",

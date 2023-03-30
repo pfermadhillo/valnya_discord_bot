@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./main.js"
+    "start": "nodemon ./main.js --ignore '*.json'  2>&1 | tee logs/\"$(date +\"%Y_%m_%d_%I_%M_%p\").log\""
   },
   "keywords": [],
   "author": "",
