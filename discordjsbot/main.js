@@ -101,7 +101,7 @@ client.on(Events.MessageCreate, async message => {
         }else{
           message.channel.send(prefix+"You really don't need to be rolling "+dice+" dice..");
         }
-        message.delete();
+        message.delete().catch(() => {/*Ignore error*/});
       }else{
         // message.channel.send(prefix+retval);
       }
@@ -120,7 +120,7 @@ client.on(Events.MessageCreate, async message => {
         }else{
           message.channel.send(prefix+"You really don't need to be rolling "+dice+" dice..");
         }
-        message.delete();
+        message.delete().catch(() => {/*Ignore error*/});
       }else{
         // message.channel.send(prefix+retval);
       }
@@ -138,7 +138,7 @@ client.on(Events.MessageCreate, async message => {
       }else{
         message.channel.send(prefix+"Mmmm.. "+dice+" is too big..");
       }
-      message.delete();
+      message.delete().catch(() => {/*Ignore error*/});
     }else if(Number.isInteger(streak)){
       message.channel.send("Running streak: " + streak);
       while (streak > 0 && streak < 100) {
@@ -146,12 +146,12 @@ client.on(Events.MessageCreate, async message => {
       message.channel.send(rd.rollChance()+"\t"+rd.rollChance()+"\t"+rd.rollChance());
     }
     message.channel.send("...  *phew* ...  done streak: " + streak);
-      message.delete();
+      message.delete().catch(() => {/*Ignore error*/});
     }
     else if(message.content.includes("bone")){
       var bonePrefix = "@" + message.author.username.toString() + " wills  ***__T H E   B O N E S__***  to speak! \n";
       message.channel.send(bonePrefix+rd.rollTheBones());
-      message.delete();
+      message.delete().catch(() => {/*Ignore error*/});
     }
     else{
       // message.channel.send(prefix+retval);
@@ -172,7 +172,7 @@ client.on(Events.MessageCreate, async message => {
       message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr));
       fakePwr = 20;
       message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr));
-      message.delete();
+      message.delete().catch(() => {/*Ignore error*/});
     }
     if(Number.isInteger(power)){
       if(power > 4 && power < 21){
@@ -180,7 +180,7 @@ client.on(Events.MessageCreate, async message => {
       }else{
         message.channel.send(prefix+"Power: "+power+", should represent approx highest monster dice pool, between 5 and 20.");
       }
-      message.delete();
+      message.delete().catch(() => {/*Ignore error*/});
     }
     else{
       // message.channel.send(prefix+retval);

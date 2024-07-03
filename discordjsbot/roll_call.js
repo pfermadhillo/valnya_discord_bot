@@ -21,6 +21,8 @@ var announce = "\n Lemme know below if you can make it!";
 var meet = "(*Online*) at 6:00pm!"
 // role_id:"<@&576081452211372062>"
 
+const rollsToCallArray= []
+/*
 const rollsToCallArray= [
 // {
 // 	cron: '0 * * * * *',
@@ -43,6 +45,7 @@ const rollsToCallArray= [
 	tagID:sacrifice_active_id,
 	message:'   **Its is Thursday my dudes!!**'+announce+meet
 }]
+*/
 
 function makeRoleFromID(id){
 	return "<@&" + id + ">"
