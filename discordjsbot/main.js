@@ -83,10 +83,10 @@ client.on(Events.MessageCreate, async message => {
   if (command === 'prefix') {
     if (args.length) {
       // await prefixes.set(message.guild.id, args[0]);
-      return message.channel.send(`Successfully set prefix to \`${args[0]}\``);
+      return message.channel.send(`Successfully set prefix to \`${args[0]}\``).catch(() => {/*Ignore error*/});;
     }
 
-    return message.channel.send(`Prefix is `);
+    return message.channel.send(`Prefix is `).catch(() => {/*Ignore error*/});
   }
 
   if(command === 'r'){
@@ -97,9 +97,9 @@ client.on(Events.MessageCreate, async message => {
       console.log("prefix: ", prefix, "dice:",dice,"retval:",retval)
 
         if(dice > 0 && dice < 100){
-          message.channel.send(prefix+rd.rollDice(dice));
+          message.channel.send(prefix+rd.rollDice(dice)).catch(() => {/*Ignore error*/});
         }else{
-          message.channel.send(prefix+"You really don't need to be rolling "+dice+" dice..");
+          message.channel.send(prefix+"You really don't need to be rolling "+dice+" dice..").catch(() => {/*Ignore error*/});
         }
         message.delete().catch(() => {/*Ignore error*/});
       }else{
@@ -113,12 +113,12 @@ client.on(Events.MessageCreate, async message => {
       var prefix = "@" + message.author.username.toString() + "'s streak test: \n";
       if(Number.isInteger(dice)){
         if(dice > 0 && dice < 21){
-          message.channel.send(prefix+rd.rollDice(dice) + "\n"+rd.rollDice(dice) + "\n"+rd.rollDice(dice));
-          message.channel.send(rd.rollDice(dice) + "\n"+rd.rollDice(dice) + "\n"+rd.rollDice(dice));
-          message.channel.send(rd.rollDice(dice) + "\n"+rd.rollDice(dice) + "\n"+rd.rollDice(dice));
-          message.channel.send(rd.rollDice(dice) + "\n"+rd.rollDice(dice) + "\n"+rd.rollDice(dice));
+          message.channel.send(prefix+rd.rollDice(dice) + "\n"+rd.rollDice(dice) + "\n"+rd.rollDice(dice)).catch(() => {/*Ignore error*/});
+          message.channel.send(rd.rollDice(dice) + "\n"+rd.rollDice(dice) + "\n"+rd.rollDice(dice)).catch(() => {/*Ignore error*/});
+          message.channel.send(rd.rollDice(dice) + "\n"+rd.rollDice(dice) + "\n"+rd.rollDice(dice)).catch(() => {/*Ignore error*/});
+          message.channel.send(rd.rollDice(dice) + "\n"+rd.rollDice(dice) + "\n"+rd.rollDice(dice)).catch(() => {/*Ignore error*/});
         }else{
-          message.channel.send(prefix+"You really don't need to be rolling "+dice+" dice..");
+          message.channel.send(prefix+"You really don't need to be rolling "+dice+" dice..").catch(() => {/*Ignore error*/});
         }
         message.delete().catch(() => {/*Ignore error*/});
       }else{
@@ -134,23 +134,23 @@ client.on(Events.MessageCreate, async message => {
     // console.log("rollChance", dice);
     if(Number.isInteger(dice)){
       if(dice > 0 && dice < 100){
-        message.channel.send(prefix+rd.rollChance(dice));
+        message.channel.send(prefix+rd.rollChance(dice)).catch(() => {/*Ignore error*/});
       }else{
-        message.channel.send(prefix+"Mmmm.. "+dice+" is too big..");
+        message.channel.send(prefix+"Mmmm.. "+dice+" is too big..").catch(() => {/*Ignore error*/});
       }
       message.delete().catch(() => {/*Ignore error*/});
     }else if(Number.isInteger(streak)){
-      message.channel.send("Running streak: " + streak);
+      message.channel.send("Running streak: " + streak).catch(() => {/*Ignore error*/});
       while (streak > 0 && streak < 100) {
       streak -= 3;
-      message.channel.send(rd.rollChance()+"\t"+rd.rollChance()+"\t"+rd.rollChance());
+      message.channel.send(rd.rollChance()+"\t"+rd.rollChance()+"\t"+rd.rollChance()).catch(() => {/*Ignore error*/});
     }
-    message.channel.send("...  *phew* ...  done streak: " + streak);
+    message.channel.send("...  *phew* ...  done streak: " + streak).catch(() => {/*Ignore error*/});
       message.delete().catch(() => {/*Ignore error*/});
     }
     else if(message.content.includes("bone")){
       var bonePrefix = "@" + message.author.username.toString() + " wills  ***__T H E   B O N E S__***  to speak! \n";
-      message.channel.send(bonePrefix+rd.rollTheBones());
+      message.channel.send(bonePrefix+rd.rollTheBones()).catch(() => {/*Ignore error*/});
       message.delete().catch(() => {/*Ignore error*/});
     }
     else{
@@ -163,22 +163,22 @@ client.on(Events.MessageCreate, async message => {
     var prefix = "@" + message.author.username.toString() + " summons a monster like whoa: \n";
     // console.log("rollChance", dice);
     if(message.content.includes("streak!")){
-      message.channel.send("You asked for it....");
+      message.channel.send("You asked for it....").catch(() => {/*Ignore error*/});
       var fakePwr = 4;
-      message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr));
+      message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)).catch(() => {/*Ignore error*/});
       fakePwr = 8;
-      message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr));
+      message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)).catch(() => {/*Ignore error*/});
       fakePwr = 14;
-      message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr));
+      message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)).catch(() => {/*Ignore error*/});
       fakePwr = 20;
-      message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr));
+      message.channel.send(fakePwr+"\n"+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)+rd.generateMonster(fakePwr)).catch(() => {/*Ignore error*/});
       message.delete().catch(() => {/*Ignore error*/});
     }
     if(Number.isInteger(power)){
       if(power > 4 && power < 21){
-        message.channel.send(prefix+rd.generateMonster(power));
+        message.channel.send(prefix+rd.generateMonster(power)).catch(() => {/*Ignore error*/});
       }else{
-        message.channel.send(prefix+"Power: "+power+", should represent approx highest monster dice pool, between 5 and 20.");
+        message.channel.send(prefix+"Power: "+power+", should represent approx highest monster dice pool, between 5 and 20.").catch(() => {/*Ignore error*/});
       }
       message.delete().catch(() => {/*Ignore error*/});
     }
@@ -194,7 +194,7 @@ client.on(Events.MessageCreate, async message => {
 
   if(command === 'ticketreact'){
     if(isAdmin(message)){
-      tkts.ticketReactPost(client, message);
+      tkts.ticketReactPost(client, message).catch(() => {/*Ignore error*/});
     }
   }
 

@@ -52,7 +52,7 @@ var check_word = function(msg){
 	wordArray.forEach(word => {
 		if(msg.content.toLowerCase().includes(word.word.toLowerCase())){
 			if(checkIfReply(word)){
-				msg.channel.send(getReply(word));
+				msg.channel.send(getReply(word)).catch(() => {/*Ignore error*/});;
 			}
 		}
 	})
