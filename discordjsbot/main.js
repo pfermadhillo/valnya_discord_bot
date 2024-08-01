@@ -13,13 +13,14 @@ const rc = require('./roll_call.js');
 const rd = require('./roll_dice.js');
 const bfq = require('./bot_funny_quips.js');
 const tkts = require('./tickets.js');
+const rndenc = require('./randomencounter.js');
 
 
 const pingList = ["pong","pong","pong","pong","pong","pong","pong","pong","pong","pong","pong","pong",
       "pong","pong","pong","pong","pong","pong","pong","pong","pong","pong","pong","pong",
       "stahp","i got u","wat","wat do", "cash me ousside","no plz no","ooo-wee","oof","big mood",
       "im here", "relax bruh", "chill dawg", "naw, that aint me", "raspberry sherbert","get rekt skrub",
-      "roundtrip 24.7ms\n...lol not really", "🇾", "💖💞💝", "㊙️","🍆🍑💦"];
+      "roundtrip 24.7ms\n...lol not really", "🇾", "💖💞💝", "㊙️"];
 
 function getRandomInt(min, max) { // inclusive
     return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
@@ -196,6 +197,11 @@ client.on(Events.MessageCreate, async message => {
     if(isAdmin(message)){
       tkts.ticketReactPost(client, message).catch(() => {/*Ignore error*/});
     }
+  }
+
+
+  if(command === 'rndenc' || command === 'randomencounter' ){
+    rndenc.process_args(message, args);
   }
 
   // client.on('messageReactionAdd', (reaction, user) => {
